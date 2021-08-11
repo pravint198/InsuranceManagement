@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+</head>
+<body>
+<div class="container-fluid">
+    <center style="margin:10px;font-size:20px;"><b>Registration form</b></center>
+    <form class="form-horizontal" action="register" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                {{ form.firstname }}
+                <!--input type="text" class="form-control" id="fname" name="firstname" placeholder="First name"-->
+            </div>
+             <strong id="fname_error" class="col-sm-offset-4 col-sm-4"
+                style="color:red;margin-top:0px">{{ form.firstname.errors|striptags }}</strong>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                {{ form.lastname }}
+                <!--input type="text" class="form-control" id="lname" name="lastname" placeholder="Last name"-->
+            </div>
+            <strong id="lname_error" class="col-sm-offset-4 col-sm-4"
+                style="color:red;margin-top:0px;">{{ form.lastname.errors|striptags }}</strong>
+        
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4  col-sm-4">
+                {{ form.username }}
+                <!--input type="text" class="form-control" id="uname" name="username" placeholder="Username"-->
+            </div>
+            <strong id="uname_error" class="col-sm-offset-4 col-sm-4"
+                style="color:red;margin-top:0px;">{{ form.username.errors|striptags }}</strong>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                {{ form.email }}
+                <!--input type="email" class="form-control" id="email" name="email" placeholder="Email"-->
+            </div>
+            <strong id="email_error" class="col-sm-offset-4 col-sm-4"
+                style="color:red;margin-top:0px;">{{ form.email.errors|striptags }}</strong>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                {{ form.password1 }}
+                <!--input type="password" class="form-control" id="pwdd" name="password1" placeholder="Password"-->
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                {{ form.password2 }}
+                <!--input type="password" class="form-control" id="confpwd" name="password2" placeholder="Confirm password"-->
+            </div>
+            <strong id="pwd_error" class="col-sm-offset-4 col-sm-4"
+                style="color:red;margin-top:0px;">{{ form.password2.errors|striptags }}</strong>
+        </div>
+     
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-10">
+                <input type="submit" class="btn btn-primary"/>
+            </div>
+        </div>
+        <div class="col-sm-offset-4 col-sm-10">
+            {% if messages %}
+                {% for message in messages %}
+                    <h3 style="color:red">{{message}}</h3>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </form>
+    <div class="col-sm-offset-4 col-sm-10"><a  href="login">Already registered? Click to Login</a></div>
+</div>
+
+</body>
+</html>

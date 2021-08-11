@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function searchPolicy() {
+
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("search");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("policyTable");
+              tr = table.getElementsByTagName("tr");
+
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+
+            $(function () {
+        $(".deleteButton").click(function () {
+            var my_id_value = $(this).data('id');
+            $(".modal-footer #btnConfDelete").attr("href",my_id_value);
+        })
+    });
+    </script>
+    
+    <style>
+        .bottomMargin{margin-bottom:12px}
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        
+        <div class="row" style="margin-top:12px;margin-bottom:8px">
+           <div class="col-xs-4">  <input type="text"onkeyup="searchPolicy()" id="search" class="form-control" placeholder="Search Policy"></div>
+            <div class="col text-right"><a href="/client/dashboard" class="btn btn-default">Dashboard</a> <a href="/client/logout" class="btn btn-default">Logout</a></div>
+        </div>
+           
+            
+            <b>Customer Id: </b>{{ cust_id }}
+        
+
+        <div>
+            <table class="table table-bordered table-striped" id="policyTable">
+                <tr>
+                    <th>Policy Id</th>
+                    <th>Policy Number</th>
+                    
+                    <th>Term plan</th>
+                    <th>Sum assured</th>
+                    <th>Delete</th>
+                   
+                    
+                </tr>
+                
+               {% for policy in policies %}
+                <tr>
+                    <td>{{ policy.id }}</td>
+                    <td>{{ policy.policy_no }}</td>
+                    <td>{{ policy.term_plan }}</td>
+                    <td>{{ policy.sum_assured }}</td>
+                    <td><a href="#" class="glyphicon glyphicon-trash deleteButton" data-id="/client/policy/delete/{{ policy.id }}" data-toggle="modal" data-target="#myModal"></a></td>
+                    <!--td><a href="/client/policy/delete/{{ policy.id }}"><i class="glyphicon glyphicon-trash" data-toggle="modal" data-target="#myModal"></i></a></td-->
+
+                    <!--td><a href="/client/modify/{{ cust.id }}"><i class="glyphicon glyphicon-edit"></i></a></td>
+                    <td><a href="#"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp&nbsp&nbsp&nbsp<a href="/client/policy/add/{{ cust.id }}"><i class="glyphicon glyphicon-plus"></i></a></td-->
+               </tr>
+               {% endfor %}
+               
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete policy</h4>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete the policy?</p>
+      </div>
+      <div class="modal-footer">
+        <a id="btnConfDelete" class="btn btn-default">Yes</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
