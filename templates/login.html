@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script>
+      
+
+
+
+
+    </script>
+</head>
+<body>
+
+<div class="w3-card-4 w3-margin-top" style="margin:auto;width: 50%;height:300px">
+    
+    <center style="margin:10px;font-size:20px;padding-top:10px"><b>Login</b></center>
+    <form class="form-horizontal" action="login" method="post">
+     {% csrf_token %}
+        <div class="form-group">
+            <div class="col-sm-offset-4  col-sm-4">
+                {{ form.username }}
+            </div>
+        </div>
+        <strong id="uname_error" class="col-sm-offset-4 col-sm-4"
+                style="display:block;color:red;margin-top:0px;margin-bottom:12px">{{ form.username.errors|striptags }}</strong>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                {{ form.password }}
+            </div>
+        </div>
+        <strong id="pwd_error" class="col-sm-offset-4 col-sm-4"
+                style="display:block;color:red;margin-top:0px;margin-bottom:12px">{{ form.password.errors|striptags }}</strong>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-10">
+                <input type="submit" class="btn btn-primary"/>
+            </div>
+        </div>
+         <div class="col-sm-offset-4 col-sm-10">
+            {% if messages %}
+                {% for message in messages %}
+                    <h3 style="color:red">{{message}}</h3>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </form>
+    <div class="col-sm-offset-4 col-sm-10"><a  href="register">Not registered yet? Click to Register</a></div>
+
+</div>
+
+
+</body>
+</html>
