@@ -15,10 +15,13 @@ def addCustomer(request):
 
 	
 	if request.method=='POST':
+		
 		form=CustomerForm(request.POST)
 		if form.is_valid():
-			Customers(name=form.cleaned_data['name'],father_name=form.cleaned_data['father_name'],mother_name=form.cleaned_data['mother_name'],spouse_name=form.cleaned_data['spouse_name'],gender=form.cleaned_data['gender'],is_married=form.cleaned_data['is_married'],dob=form.cleaned_data['dob'],place_of_birth=form.cleaned_data['place_of_birth'], correspondence_address=form.cleaned_data['correspondence_address'],is_perm_same=form.cleaned_data['is_perm_same'],permanent_address=form.cleaned_data['permanent_address'],pan=form.cleaned_data['pan'],aadhar=form.cleaned_data['aadhar'],education=form.cleaned_data['education'],mobile=form.cleaned_data['mobile'],height=form.cleaned_data['height'],weight=form.cleaned_data['weight'],username=request.user.username).save()
-			#form.save()
+			#Customers(name=form.cleaned_data['name'],father_name=form.cleaned_data['father_name'],mother_name=form.cleaned_data['mother_name'],spouse_name=form.cleaned_data['spouse_name'],gender=form.cleaned_data['gender'],is_married=form.cleaned_data['is_married'],dob=form.cleaned_data['dob'],place_of_birth=form.cleaned_data['place_of_birth'], correspondence_address=form.cleaned_data['correspondence_address'],is_perm_same=form.cleaned_data['is_perm_same'],permanent_address=form.cleaned_data['permanent_address'],pan=form.cleaned_data['pan'],aadhar=form.cleaned_data['aadhar'],education=form.cleaned_data['education'],mobile=form.cleaned_data['mobile'],height=form.cleaned_data['height'],weight=form.cleaned_data['weight'],username=request.user.username).save()
+			form=form.save(commit=False)
+			form.username=request.user.username
+			form.save()
 			messages.info(request,'Customer saved successfully',extra_tags='text-success')
 			return redirect('/client/add')
 		else:

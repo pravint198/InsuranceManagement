@@ -54,7 +54,7 @@
                {% for cust in custs %}
                 <tr>
                     <td>{{ cust.id }}</td>
-                    <td>{{ cust.name }}</td>
+                    <td>{{ cust.name  }} {{ cust.father_name }} {{ cust.last_name }}</td>
                    
                     <td><a href="/client/modify/{{ cust.id }}"><i class="glyphicon glyphicon-edit"></i></a></td>
                     <td><a href="/client/policy/show/{{ cust.id }}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp&nbsp&nbsp&nbsp<a href="/client/policy/add/{{ cust.id }}"><i class="glyphicon glyphicon-plus"></i></a></td>

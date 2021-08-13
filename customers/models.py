@@ -17,6 +17,7 @@ class Customers(models.Model):
 	name=models.CharField(max_length=50)
 	father_name=models.CharField(max_length=50)
 	mother_name=models.CharField(max_length=50)
+	last_name=models.CharField(max_length=50)
 	spouse_name=models.CharField(max_length=50,blank=True)
 	gender=models.CharField(max_length=1,choices=gender_choices)
 	is_married=models.CharField(max_length=1,choices=is_married_choices)
